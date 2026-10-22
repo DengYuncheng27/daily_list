@@ -1,0 +1,23 @@
+# Resolved and tested on Python 3.11; supported runtime Python 3.11/3.12.
+annotated-doc==0.0.5
+annotated-types==0.8.0
+anyio==4.15.1
+argon2-cffi==25.1.0
+argon2-cffi-bindings==26.1.0
+cffi==2.1.1
+click==8.5.0
+dnspython==2.9.0
+email-validator==2.3.0
+fastapi==0.150.0
+h11==0.16.0
+idna==3.20
+opentelemetry-api==1.45.1
+pillow==13.0.0
+pycparser==3.11
+pydantic==2.14.1
+pydantic-core==2.50.1
+pyjwt==2.15.1
+starlette==1.9.0
+typing-extensions==4.16.0
+typing-inspection==0.4.4
+uvicorn==0.54.0

@@ -1,0 +1,38 @@
+name: dayflow
+description: "日序 Dayflow — 跨设备的清单与月历"
+publish_to: 'none'
+version: 1.2.0+3
+
+environment:
+  sdk: ^3.13.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  http: ^1.6.0
+  uuid: ^4.5.2
+  shared_preferences: ^2.5.4
+  flutter_secure_storage: ^10.0.0
+  intl: ^0.20.2
+  cupertino_icons: ^1.0.8
+  flutter_quill: ^11.6.0
+  lunar: ^1.7.8
+  file_picker: ^13.1.0
+  crypto: ^3.0.7
+  hive_ce: ^2.22.0
+  path_provider: ^2.1.5
+  timezone: ^0.11.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: DayflowSans
+      fonts:
+        - asset: assets/fonts/NotoSansSC.ttf

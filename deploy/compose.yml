@@ -1,0 +1,74 @@
+services:
+  api:
+    build:
+      context: ../server
+    environment:
+      DAYFLOW_JWT_SECRET: ${DAYFLOW_JWT_SECRET:?Set a random JWT secret in deploy/.env}
+      DAYFLOW_DATABASE_PATH: /data/dayflow.sqlite3
+      DAYFLOW_ATTACHMENT_DIRECTORY: /data/attachments
+      DAYFLOW_ATTACHMENT_MAX_BYTES: ${DAYFLOW_ATTACHMENT_MAX_BYTES:-10485760}
+      DAYFLOW_ATTACHMENT_QUOTA_BYTES: ${DAYFLOW_ATTACHMENT_QUOTA_BYTES:-104857600}
+      DAYFLOW_ALLOWED_ORIGINS: https://${DAYFLOW_DOMAIN}
+      DAYFLOW_REGISTRATION_ENABLED: ${DAYFLOW_REGISTRATION_ENABLED:-false}
+      DAYFLOW_AUTH_RATE_LIMIT: 20
+      DAYFLOW_SYNC_RATE_LIMIT: 120
+    volumes:
+      - dayflow-data:/data
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 512m
+    pids_limit: 128
+    # Only this private Caddy address may supply client IP headers.
+    # The standalone image deliberately keeps --no-proxy-headers.
+    command:
+      - uvicorn
+      - dayflow.main:create_app
+      - --factory
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      - --workers
+      - "1"
+      - --proxy-headers
+      - --forwarded-allow-ips
+      - ${DAYFLOW_PROXY_IP:-172.30.72.3}
+      - --no-access-log
+    networks:
+      - api-proxy
+  web:
+    image: caddy:2.10-alpine
+    environment:
+      DAYFLOW_DOMAIN: ${DAYFLOW_DOMAIN:?Set your domain in deploy/.env}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ../client/build/web:/srv:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      default:
+      api-proxy:
+        ipv4_address: ${DAYFLOW_PROXY_IP:-172.30.72.3}
+networks:
+  default:
+  api-proxy:
+    internal: true
+    ipam:
+      config:
+        - subnet: ${DAYFLOW_PROXY_SUBNET:-172.30.72.0/29}
+volumes:
+  dayflow-data:
+  caddy-data:
+  caddy-config:

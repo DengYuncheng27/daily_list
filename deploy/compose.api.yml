@@ -1,0 +1,24 @@
+services:
+  api:
+    build:
+      context: ../server
+    env_file: ../server/.env
+    environment:
+      DAYFLOW_DATABASE_PATH: /data/dayflow.sqlite3
+      DAYFLOW_ATTACHMENT_DIRECTORY: /data/attachments
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - dayflow-data:/data
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 512m
+    pids_limit: 128
+volumes:
+  dayflow-data:

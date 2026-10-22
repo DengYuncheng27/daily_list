@@ -1,0 +1,15 @@
+"Date: 2026-10-22+0000"
+"Version: 7.1"
+"Status:
+0 Normal
+1 Completed
+2 Archived"
+"Folder Name","List Name","Title","Kind","Tags","Content","Is Check list","Start Date","Due Date","Reminder","Repeat","Priority","Status","Created Time","Completed Time","Order","Timezone","Is All Day","Is Floating","Column Name","Column Order","View Mode","taskId","parentId","Estimated Pomodoro"
+"工作","产品","部署 ""日序"", 验收","TEXT","工作,发布","第一行
+第二行","N","2026-10-22T01:00:00+0000","2026-10-22T02:30:00+0000","-PT15M","FREQ=WEEKLY;BYDAY=TH","5","0","2026-10-20T01:00:00+0000","","0","Asia/Shanghai","false","false","发布","0","list","0","","3"
+"","生活","采购","CHECKLIST","生活","▫牛奶
+▪咖啡","Y","2026-10-22T00:00:00+0000","","","","1","1","2026-10-19T01:00:00+0000","2026-10-22T03:00:00+0000","1","Asia/Shanghai","true","false","","","list","1","",""
+"工作","产品","设计笔记","NOTE","设计","# 设计参考
+![示意图](https://example.invalid/private-image.png)","N","","","","","0","0","2026-10-20T01:00:00+0000","","2","Asia/Shanghai","false","false","","","list","2","",""
+"工作","产品","运行回归检查","TEXT","测试","保留完整子任务正文","N","2026-10-22T00:00:00+0000","","","","3","0","2026-10-20T02:00:00+0000","","3","Asia/Shanghai","true","false","","","list","3","0",""
+"","Inbox","历史归档","TEXT","","历史记录也保留","N","","","","","0","2","2026-10-18T01:00:00+0000","","4","Asia/Shanghai","false","false","","","list","4","",""
